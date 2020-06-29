@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+    <title>产品购买</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style>
+    .center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <div class="center">
+            <div>
+                产品数量选择
+                <select @mouseup="mu" ref="sel">
+                    <option v-for="(item,index) in list" :key='index'>{{item}}</option>
+                </select> (目前的产品库存为：10件)
+            </div>
+            <div>
+                产品单价为：99￥
+            </div>
+            <div>
+                产品总价格为：{{price}}￥
+            </div>
+            <div>
+                物流选择
+                <select>
+                    <option v-for="(item,index) in logisticsList" :key='index'>{{item}}</option>
+                </select>
+            </div>
+        </div>
+        <li class="center">所在地区：
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">所在省</label>
+                    <div class="col-md-9">
+
+                        <select ref="province" name="province" required id="province" class="form-control"
+                            @mouseup="chooseCity();" @mouseover="initProvince()">
+                            <option selected value="">选择所在的省份</option>
+
+                            <foreach name="province" item="vo">
+                                <option selected :value="item" v-for="item in province">{{item}}</option>
+                            </foreach>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">所在市</label>
+                    <div class="col-md-9">
+                        <select ref='city' id="market" name="city" required class="form-control" @mouseup="chooseArea(); ">
+                            <option selected value="">请选择所在的市</option>
+
+                            <foreach name="province" item="vo">
+                                <option selected :value="item" v-for="item in city">{{item}}</option>
+                            </foreach>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label  col-md-3">所在区/县</label>
+                    <div class="col-md-9">
+                        <select name="county" required id="area" class="form-control" onclick="defaultNext()">
+                            <option value="{$vo.provinceid}">请选择所在的区</option>
+
+                            
+                            <foreach name="province" item="vo">
+                                <option selected :value="item" v-for="item in area">{{item}}</option>
+                            </foreach>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                详细地址输入： <input/>
+            </div>
+
+            <a href="success.html"><button>确认购买</button></a>
+        </li>
+
+
+
+        <!-- 隐藏域携带 sc_area sc_areanum  跟随form表单提交值 -->
+        <input type="hidden" name="post[sc_area]" id="sc_area" value="">
+        <input type="hidden" name="post[sc_areanum]" id="sc_areanum" value="">
+    </div>
+
+
+
+</body>
+
+<!-- 后来 做的三级联动  从数据库里面查出来 -->
+
+<script src='./js/zone.js'></script>
+<script>
+    chooseMarket = function () {
+
+    }
+</script>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            tPrice: 99,
+            logisticsList: ['中通', '圆通', '申通', '顺丰', 'EMS', '平邮'],
+            province:[],
+            city: [],
+            area: [],
+        },
+        computed: {
+            price: function () {
+                // return this.$refs.sel.value
+                return this.tPrice
+            }
+        },
+        watch: {
+            ee(val, newVal) {
+
+            }
+        },
+        created() {
+            // this.list =
+        },
+        mounted() {
+            // console.log(this.$refs.sel)
+        },
+        methods: {
+            mu() {
+                this.tPrice = this.$refs.sel.value * 99
+            },
+            initProvince(){
+                this.province = Object.keys(zone)
+            },
+            chooseCity() {
+                this.city = Object.keys(zone[this.$refs.province.value])
+                console.log(this.city)
+            },
+            chooseArea(){
+                this.area = zone[this.$refs.province.value][this.$refs.city.value]
+            }
+        },
+
+    })
+</script>

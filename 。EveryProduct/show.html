@@ -1,0 +1,369 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+    <title>产品展示</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style>
+    #loopDiv {
+        width: 790px;
+        height: 340px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    #pic {
+        width: 790px;
+        height: 340px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    #list {
+        list-style: none;
+        position: absolute;
+        bottom: 10px;
+        left: 250px;
+    }
+
+    #list li {
+        float: left;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+        border-radius: 50%;
+        background: #aaa;
+        margin-right: 10px;
+    }
+
+    .chooseBut {
+        width: 50px;
+        height: 80px;
+        background-color: rgba(0, 0, 0, 0.2);
+        color: #fff;
+        font-size: 30px;
+        line-height: 80px;
+        text-align: center;
+        display: none;
+    }
+
+    .middle {
+        display: flex;
+        align-items: center;
+        /* 垂直居中 */
+        justify-content: center;
+        /* 水平居中 */
+    }
+
+    #left {
+        position: absolute;
+        left: 0px;
+        top: 130px;
+    }
+
+    #right {
+        position: absolute;
+        right: 0px;
+        top: 130px;
+    }
+
+    .top-container {
+        background: #fbfbfb;
+        height: 30px;
+        min-width: 1500px;
+        border: 1px solid #e8e8e8;
+        font-family: 'Tahoma', 'simsun' !important;
+        color: #747d87;
+        margin: 0;
+        z-index: 2;
+    }
+
+    .top-wrapper {
+        width: 1450px;
+        height: 30px;
+        border: 1px solid red;
+        margin: auto;
+    }
+
+    .top-left-nav,
+    .user-nav {
+        display: inline-block;
+        border: 1px solid red;
+        height: 30px;
+    }
+
+    .nav {
+        display: inline-block;
+        margin: 0 auto;
+        padding: 0;
+        position: relative;
+    }
+
+    .nav:after {
+        content: "";
+        display: block;
+        clear: both;
+        visibility: hidden;
+        width: 0px;
+        height: 0px;
+    }
+
+    .nav ul,
+    .nav li {
+        display: block;
+        position: relative;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .nav a {
+        text-decoration: none;
+        display: block;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .first-nav {
+        float: left;
+        text-align: center;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .sec-nav {
+        position: relative;
+        display: block;
+        text-align: center;
+    }
+
+    .top-left-nav .first-nav {
+        /*显示具体布局*/
+        width: 130px;
+        line-height: 30px;
+    }
+
+    .top-left-nav .sec-nav {
+        margin: 0px;
+        display: none;
+        padding: 5px 3px;
+        width: 130px;
+    }
+
+    .top-left-nav .first-nav:hover .sec-nav {
+        display: block;
+        border: 1px solid #e8e8e8;
+    }
+
+    .flex-space-between {
+        display: flex;
+        justify-content: space-between;
+    }
+</style>
+
+<body>
+
+    <body style="margin:0;">
+        <!--导航栏一般需要一个容器，设置width:100%适应浏览器的大小变化-->
+        <div class="top-container container" id="app">
+            <!--导航栏wrapper一般设置一个固定大小这样子可以通过margin:auto;实现导航栏水平居中
+     由于顶层容器是适应浏览器变化宽度，所以可以保持水平导航栏自适应浏览器窗口宽度保持居中-->
+            <div class="top-wrapper wrapper">
+                <!--这个是普通导航栏的容器，就是除了"立即登陆"和"注册新账号"-->
+                <div class="nav top-left-nav flex-space-between">
+                    <!--开始实现列表-->
+                    <ul>
+                        <li class="dropdown first-nav"><span>产品介绍<i class="icon icon-arrow"></i></span>
+                            <ul class="sec-nav">
+                                <li><a href="#">介绍</a></li>
+                                <li><a href="#">说明</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown  first-nav"><span>产品详情<i class="icon icon-arrow"></i></span>
+                            <ul class="sec-nav">
+                                <li><a href="#">性能</a></li>
+                                <li><a href="#">参数</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown  first-nav"><span>公司介绍</i></i></i></i></i></i><i
+                                    class="icon icon-arrow"></i></span>
+                            <ul class="sec-nav">
+                                <li><a href="#">公司位置</a></li>
+                                <li><a href="#">公司业务</a></li>
+                            </ul>
+                        </li>
+                        <li class="first-nav"><span>手机版</span>
+                            <ul class="sec-nav">
+                                <li><a href="#"><span><img src="./2.jpg" /></span></a></li>
+                            </ul>
+                        </li>
+                        <li class="first-nav"><span>旧版</span></li>
+                        <li class="new  first-nav"><span>其他<i class="icon icon-new"></i></span></li>
+                    </ul>
+                </div>
+                <!-- <div class="nav user-nav">
+                    <ul>
+                        <li class="first-nav"><a href="#">立即登录</a></li>
+                        <li class="first-nav"><a href="#">立即注册</a></li>
+                    </ul>
+                </div> -->
+            </div>
+        </div>
+    </body>
+
+    <div class="middle">
+        <img src="./image/8.jpg" />
+    </div>
+    <strong>点击选择你想要购买的产品：</strong>
+    <a href="./buy.html">
+        <div @click="buy()" id="loopDiv">
+            <img src='./image/9.jpg' id='pic' />
+            <ul id="list">
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+                <li>6</li>
+                <li>7</li>
+                <li>8</li>
+            </ul>
+            <div id="left" class="chooseBut">
+            </div>
+            <div id="right" class="chooseBut">></div>
+        </div>
+    </a>
+    <div class="middle">
+        <video class="middle" width="320" height="240" controls>
+            <source src="https://file.91talk.com/clips/TV/TNR/The.Newsroom.S01E01-Clip01.mp4" type="video/mp4">
+            <object data="https://file.91talk.com/clips/TV/TNR/The.Newsroom.S01E01-Clip01.mp4" width="320" height="240">
+                <embed src="https://file.91talk.com/clips/TV/TNR/The.Newsroom.S01E01-Clip01.mp4" width="320"
+                    height="240">
+            </object>
+        </video>
+    </div>
+    <script type="text/javascript">
+        var jsDivBox = document.getElementById("loopDiv");
+        //图片节点
+        var jsImg = document.getElementById("pic");
+        //左右按钮节点
+        var jsLeft = document.getElementById("left");
+        var jsRight = document.getElementById("right");
+        //获取所有的li
+        var jsUl = document.getElementById("list");
+        var jsLis = jsUl.getElementsByTagName("li");
+        //让第一个小圆点变为红色
+        jsLis[0].style.backgroundColor = "red";
+
+        //显示当前的图片下标
+        var currentPage = 0;
+
+        //启动定时器
+        var timer = setInterval(func, 1000);
+
+        function func() {
+            currentPage++;
+            changePic();
+
+        }
+
+        function changePic() {
+            if (currentPage == 8) {
+                currentPage = 0;
+            }
+            if (currentPage == -1) {
+                currentPage = 7;
+            }
+            //更换图片
+            //"img/1.jpg"
+            let t = "./image/" + currentPage + ".jpg";
+            console.log(t)
+            jsImg.src = t
+            //将所有的小圆点颜色清空
+            for (var i = 0; i < jsLis.length; i++) {
+                jsLis[i].style.backgroundColor = "#aaa";
+            }
+            //改变对应小圆点为红色
+            jsLis[currentPage].style.backgroundColor = "red";
+        }
+
+        //鼠标进入
+        jsDivBox.addEventListener("mouseover", func1, false);
+
+        function func1() {
+            //停止定时器
+            clearInterval(timer);
+            //显示左右按钮
+            jsLeft.style.display = "block";
+            jsRight.style.display = "block";
+        }
+        //鼠标移出
+        jsDivBox.addEventListener("mouseout", func2, false);
+
+        function func2() {
+            //重启定时器
+            timer = setInterval(func, 1000);
+
+            //隐藏左右按钮
+            jsLeft.style.display = "none";
+            jsRight.style.display = "none";
+        }
+
+        //点击左右按钮
+        jsLeft.addEventListener("click", func3, false);
+
+        function func3() {
+            currentPage--;
+            changePic();
+        }
+        jsLeft.onmouseover = function () {
+            this.style.backgroundColor = "rgba(0,0,0,0.6)";
+        }
+        jsLeft.onmouseout = function () {
+            this.style.backgroundColor = "rgba(0,0,0,0.2)";
+        }
+        jsRight.addEventListener("click", func4, false);
+
+        function func4() {
+            currentPage++;
+            changePic();
+        }
+        jsRight.onmouseover = function () {
+            this.style.backgroundColor = "rgba(0,0,0,0.6)";
+        }
+        jsRight.onmouseout = function () {
+            this.style.backgroundColor = "rgba(0,0,0,0.2)";
+        }
+
+        //进入小圆点
+        for (var j = 0; j < jsLis.length; j++) {
+            jsLis[j].onmouseover = function () {
+                currentPage = parseInt(this.innerHTML) - 1;
+                changePic();
+            };
+        }
+
+        const routes = []
+
+        var router = new VueRouter({
+            routes
+        })
+
+        var app = new Vue({
+            router,
+            methods: {
+                buy() {
+
+                }
+            }
+        })
+    </script>
+</body>
+
+<script>
+</script>
